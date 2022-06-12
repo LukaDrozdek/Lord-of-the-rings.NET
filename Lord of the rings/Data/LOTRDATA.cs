@@ -61,6 +61,7 @@ namespace Lord_of_the_rings.Data
                         LOTR.Description = reader.GetString(2);
                         LOTR.AppearsIn = reader.GetString(3);
                         LOTR.WithThisActor = reader.GetString(4);     
+
                         
                     }
                 }
