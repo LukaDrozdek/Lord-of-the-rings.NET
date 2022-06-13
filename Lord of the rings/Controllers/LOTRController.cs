@@ -41,6 +41,7 @@ namespace Lord_of_the_rings.Controllers
 
 
             return View("Details", lotrModel);
+
         }
 
     }
