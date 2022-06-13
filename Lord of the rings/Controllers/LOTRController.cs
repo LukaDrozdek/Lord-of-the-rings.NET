@@ -29,6 +29,19 @@ namespace Lord_of_the_rings.Controllers
             return View("Details", LOTR);
         }
 
+        public ActionResult Create()
+        {
+            return View("LOTRForm");
+        }
+
+        public ActionResult ProcessCreate(LOTRModel lotrModel)
+        {
+            LOTRDATA lotrDATA = new LOTRDATA();
+            lotrDATA.Create(lotrModel);
+
+
+            return View("Details", lotrModel);
+        }
 
     }
 }
