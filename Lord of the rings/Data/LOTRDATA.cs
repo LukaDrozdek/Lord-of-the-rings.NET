@@ -73,15 +73,24 @@ namespace Lord_of_the_rings.Data
 
         }
 
-        public int Create(LOTRModel lotrModel)
+        public int CreateOrUpdate(LOTRModel lotrModel)
         {
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                string sqlQuery = "INSERT INTO dbo.Gadgets Values(@Name, @Description, @AppearsIn, @WithThisActor)";
+                string sqlQuery = "";
+                if(lotrModel.ID <= 0)
+                {
+                    sqlQuery = "INSERT INTO dbo.Gadgets Values(@Name, @Description, @AppearsIn, @WithThisActor)";
+                }
+                else
+                {
+                    sqlQuery = "UPDATE dbo.Gadgets SET Name = @Name, Description = @Description, AppearsIn= @AppearsIn, WithThisActor = @WithThisActor WHERE Id = @Id";
+                }
                 // povezi @id sa id parametrom
 
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.Add("@Id", System.Data.SqlDbType.VarChar, 1000).Value = lotrModel.ID;
                 command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar, 1000).Value = lotrModel.Name;
                 command.Parameters.Add("@Description", System.Data.SqlDbType.VarChar, 1000).Value = lotrModel.Description;
                 command.Parameters.Add("@AppearsIn", System.Data.SqlDbType.VarChar, 1000).Value = lotrModel.AppearsIn;

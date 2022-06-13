@@ -37,12 +37,20 @@ namespace Lord_of_the_rings.Controllers
         public ActionResult ProcessCreate(LOTRModel lotrModel)
         {
             LOTRDATA lotrDATA = new LOTRDATA();
-            lotrDATA.Create(lotrModel);
+            lotrDATA.CreateOrUpdate(lotrModel);
 
 
             return View("Details", lotrModel);
 
         }
+
+        public ActionResult Edit(int id)
+        {
+            LOTRDATA LOTRDAO = new LOTRDATA();
+            LOTRModel LOTR = LOTRDAO.FetchOne(id);
+            return View("LOTRForm", LOTR);
+        }
+
 
     }
 }
