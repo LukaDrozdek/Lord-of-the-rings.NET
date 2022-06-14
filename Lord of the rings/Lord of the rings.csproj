@@ -168,6 +168,7 @@
     <Content Include="Views\LOTR\Index.cshtml" />
     <Content Include="Views\LOTR\Details.cshtml" />
     <Content Include="Views\LOTR\LOTRForm.cshtml" />
+    <Content Include="Views\LOTR\SearchForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

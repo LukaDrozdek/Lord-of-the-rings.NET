@@ -58,6 +58,64 @@ namespace Lord_of_the_rings.Data
             }
         }
 
+        internal List<LOTRModel> SearchForName(string searchPhrase)
+        {
+            List<LOTRModel> returneList = new List<LOTRModel>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string sqlQuery = "SELECT * from dbo.Gadgets WHERE NAME LIKE @searchForMe";
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.Add("@searchForMe", System.Data.SqlDbType.NVarChar).Value = "%" + searchPhrase + "%";
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        LOTRModel LOTR = new LOTRModel();
+                        LOTR.ID = reader.GetInt32(0);
+                        LOTR.Name = reader.GetString(1);
+                        LOTR.Description = reader.GetString(2);
+                        LOTR.AppearsIn = reader.GetString(3);
+                        LOTR.WithThisActor = reader.GetString(4);
+
+                        returneList.Add(LOTR);
+                    }
+                }
+            }
+            return returneList;
+        }
+
+        internal List<LOTRModel> SearchForDescription(string searchPhrase)
+        {
+            List<LOTRModel> returneList = new List<LOTRModel>();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string sqlQuery = "SELECT * from dbo.Gadgets WHERE DESCRIPTION LIKE @searchForMe";
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.Add("@searchForMe", System.Data.SqlDbType.NVarChar).Value = "%" + searchPhrase + "%";
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        LOTRModel LOTR = new LOTRModel();
+                        LOTR.ID = reader.GetInt32(0);
+                        LOTR.Name = reader.GetString(1);
+                        LOTR.Description = reader.GetString(2);
+                        LOTR.AppearsIn = reader.GetString(3);
+                        LOTR.WithThisActor = reader.GetString(4);
+
+                        returneList.Add(LOTR);
+                    }
+                }
+            }
+            return returneList;
+        }
+
         // dohvati jednog po ID
         public LOTRModel FetchOne(int id)
         {

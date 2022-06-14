@@ -34,6 +34,7 @@ namespace Lord_of_the_rings.Controllers
             return View("LOTRForm");
         }
 
+        
         public ActionResult ProcessCreate(LOTRModel lotrModel)
         {
             LOTRDATA lotrDATA = new LOTRDATA();
@@ -61,5 +62,27 @@ namespace Lord_of_the_rings.Controllers
             return View("Index", LOTR);
         }
 
+        public ActionResult SearchForm()
+        {
+            return View("SearchForm");
+        }
+
+
+        public ActionResult SearchForName(string searchPhrase)
+        {
+            LOTRDATA lotrData = new LOTRDATA();
+            List<LOTRModel> searchResults = lotrData.SearchForName(searchPhrase);
+
+            return View("Index", searchResults);
+        }
+
+
+        public ActionResult SearchForDescription(string searchPhrase)
+        {
+            LOTRDATA lotrData = new LOTRDATA();
+            List<LOTRModel> searchResults = lotrData.SearchForDescription(searchPhrase);
+
+            return View("Index", searchResults);
+        }
     }
 }
