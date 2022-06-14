@@ -51,6 +51,15 @@ namespace Lord_of_the_rings.Controllers
             return View("LOTRForm", LOTR);
         }
 
+        public ActionResult Delete(int id)
+        {
+            LOTRDATA LOTRDAO = new LOTRDATA();
+            LOTRDAO.Delete(id);
+            List<LOTRModel> LOTR = LOTRDAO.FetchAll();
+
+
+            return View("Index", LOTR);
+        }
 
     }
 }

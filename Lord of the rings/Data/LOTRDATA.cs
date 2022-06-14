@@ -1,4 +1,5 @@
 ﻿using Lord_of_the_rings.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
@@ -37,6 +38,24 @@ namespace Lord_of_the_rings.Data
             }
             
             return returneList;
+        }
+
+        internal int Delete(int Id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                string sqlQuery = sqlQuery = "DELETE FROM dbo.Gadgets WHERE Id = @id";
+
+
+                SqlCommand command = new SqlCommand(sqlQuery, connection);
+                command.Parameters.Add("@Id", System.Data.SqlDbType.VarChar, 1000).Value = Id;
+
+                connection.Open();
+                int DeletedId = command.ExecuteNonQuery();
+
+
+                return DeletedId;
+            }
         }
 
         // dohvati jednog po ID
